@@ -53,7 +53,9 @@ LinkSFML(${PROJECT_NAME})
 set_property(TARGET ${PROJECT_NAME} PROPERTY 
   VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${PROJECT_SOURCE_DIR}/fonts"
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>/fonts)
+
+#Uncomment for font support
+#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_directory
+#        "${PROJECT_SOURCE_DIR}/fonts"
+#        $<TARGET_FILE_DIR:${PROJECT_NAME}>/fonts)
