@@ -1,33 +1,42 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
+#include <wx/wx.h>
 
-int main()
+class MyApp : public wxApp
 {
-  // create the window
-  sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+public:
+  virtual bool OnInit();
+};
 
-  // run the program as long as the window is open
-  while (window.isOpen())
-  {
-    // check all the window's events that were triggered since the last iteration of the loop
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      // "close requested" event: we close the window
-      if (event.type == sf::Event::Closed)
-        window.close();
-    }
+class MyFrame : public wxFrame
+{
+public:
+  MyFrame();
 
-    // clear the window with black color
-    window.clear(sf::Color::Black);
+private:
+  void OnExit(wxCommandEvent &event);
+};
 
-    // draw everything here...
-    // window.draw(...);
+wxIMPLEMENT_APP(MyApp);
 
-    // end the current frame
-    window.display();
-  }
+bool MyApp::OnInit()
+{
+  MyFrame *frame = new MyFrame();
+  frame->Show(true);
+  return true;
+}
 
-  return 0;
+MyFrame::MyFrame() : wxFrame(NULL, wxID_ANY, "wxStart")
+{
+  wxMenu *menuFile = new wxMenu;
+  menuFile->Append(wxID_EXIT);
+
+  wxMenuBar *menuBar = new wxMenuBar;
+  menuBar->Append(menuFile, "&File");
+
+  SetMenuBar(menuBar);
+
+  Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
+}
+void MyFrame::OnExit(wxCommandEvent &event)
+{
+  Close(true);
 }
