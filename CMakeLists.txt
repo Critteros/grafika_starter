@@ -42,8 +42,8 @@ endif()
 
 
 file(GLOB sources "src/*.cpp")
-
-add_executable(${PROJECT_NAME} WIN32 ${sources})
+file(GLOB includes "include/*.hpp" "include/*.h")
+add_executable(${PROJECT_NAME} WIN32 ${sources} ${includes})
 include_directories("include")
 target_include_directories(${PROJECT_NAME} PRIVATE "include")
 target_link_libraries(${PROJECT_NAME} PRIVATE additional_options)
